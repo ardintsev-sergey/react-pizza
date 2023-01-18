@@ -1,6 +1,6 @@
 import './scss/app.scss';
 import Header from './components/Header';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { Routes, Route } from 'react-router-dom';
