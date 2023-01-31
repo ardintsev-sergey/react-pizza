@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ReactComponent as Arrow } from '../assets/img/arrow-top.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../redux/slices/filterSlice';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 const list = [
   { name: 'популярности (вниз)', sortProperty: 'rating' },
@@ -15,6 +17,7 @@ const list = [
 const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filterReducer.sort);
+  const sortRef = useRef();
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -24,8 +27,25 @@ const Sort = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      console.log(event);
+      let path = event.composedPath().includes(sortRef.current);
+      if (!path) {
+        setOpen(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
-    <div className='sort'>
+    <div
+      ref={sortRef}
+      className='sort'
+    >
       <div className='sort__label'>
         <Arrow />
 

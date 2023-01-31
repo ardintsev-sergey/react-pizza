@@ -2,8 +2,13 @@ import { Link } from 'react-router-dom';
 import logoImg from '../assets/img/pizza-logo.svg';
 import { ReactComponent as CartIcon } from '../assets/img/cart.svg';
 import Search from './Search';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const { items, totalPrice } = useSelector((state) => state.cartReducer);
+
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
   return (
     <div className='header'>
       <div className='container'>
@@ -26,10 +31,10 @@ const Header = () => {
             to='/cart'
             className='button button--cart'
           >
-            <span>520 ₽</span>
+            <span>{totalPrice} ₽</span>
             <div className='button__delimiter'></div>
             <CartIcon />
-            <span>3</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>
