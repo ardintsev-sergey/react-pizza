@@ -16,7 +16,7 @@ function App() {
       <SearchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className='content'>
-          <Routes>
+          <Routes basename='/react-foods'>
             <Route
               path='/'
               element={<Home />}
