@@ -26,6 +26,13 @@ const Header = () => {
           </div>
         </Link>
         <Search />
+        <a
+          href='https://github.com/ardintsev-sergey/react-pizza'
+          target='_blank'
+          rel='noreferrer'
+        >
+          Repo
+        </a>
         <div className='header__cart'>
           <Link
             to='/cart'
