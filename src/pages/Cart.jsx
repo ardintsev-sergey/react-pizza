@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
-import { clearItems } from '../redux/slices/cartSlice';
+import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import CartEmpty from './CartEmpty';
 import { ReactComponent as CartIcon } from '../assets/img/cart.svg';
 import { ReactComponent as ClearIcon } from '../assets/img/clearCartIcon.svg';
@@ -10,7 +10,7 @@ import { ReactComponent as BackIcon } from '../assets/img/back.svg';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { totalPrice, items } = useSelector((state) => state.cartReducer);
+  const { totalPrice, items } = useSelector(selectCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
   const onClickClear = () => {

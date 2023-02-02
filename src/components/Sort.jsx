@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as Arrow } from '../assets/img/arrow-top.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { selectSort, setSort } from '../redux/slices/filterSlice';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 
@@ -16,7 +16,7 @@ const list = [
 
 const Sort = () => {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filterReducer.sort);
+  const sort = useSelector(selectSort);
   const sortRef = useRef();
 
   const [open, setOpen] = useState(false);
