@@ -4,12 +4,11 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -53,11 +52,6 @@ const Home = () => {
       const params = {
         categoryId: categoryId > 0 ? categoryId : null,
       };
-      // const queryString = qs.stringify({
-      //   sortProperty: sort.sortProperty,
-      //   categoryId,
-      //   currentPage,
-      // });
 
       const queryString = qs.stringify(params, { skipNulls: true });
 
@@ -73,23 +67,18 @@ const Home = () => {
   useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, searchValue, currentPage]);
-  //   window.scrollTo(0, 0);
-  // }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzas = items
-    // .filter((obj) => {
-    //   if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
-    //     return true;
-    //   }
-    //   return false;
-    // })
-    .map((pizza) => (
+  const pizzas = items.map((pizza) => (
+    <Link
+      key={pizza.id}
+      to={`/pizza/${pizza.id}`}
+    >
       <PizzaBlock
-        key={pizza.id}
         {...pizza}
         image={pizza.imageUrl}
       />
-    ));
+    </Link>
+  ));
 
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
