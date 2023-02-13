@@ -8,14 +8,16 @@ import { ReactComponent as CartIcon } from '../assets/img/cart.svg';
 import { ReactComponent as ClearIcon } from '../assets/img/clearCartIcon.svg';
 import { ReactComponent as BackIcon } from '../assets/img/back.svg';
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClickClear = () => {
-    if (window.confirm('Очистить корзину?'));
-    dispatch(clearItems());
+    if (window.confirm('Очистить корзину?')) {
+      // @ts-ignore
+      dispatch(clearItems());
+    }
   };
 
   if (!totalPrice) {
@@ -41,7 +43,7 @@ const Cart = () => {
             </div>
           </div>
           <div className='content__items'>
-            {items.map((item) => (
+            {items.map((item: any) => (
               <CartItem
                 key={item.id}
                 {...item}

@@ -11,12 +11,12 @@ const Search = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const onClickClear = () => {
+  const onClickClear = (event: React.MouseEvent<SVGSVGElement>) => {
     dispatch(setSearchValue(''));
     setValue('');
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   const updateSearchValue = useCallback(
@@ -26,8 +26,8 @@ const Search = () => {
     []
   );
 
-  const onChangeInput = (event) => {
-    setValue(event.target.value);
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target?.value);
     updateSearchValue(event.target.value);
   };
 

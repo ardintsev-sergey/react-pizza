@@ -1,19 +1,13 @@
 import { useState } from 'react';
+import React from 'react';
 
-const Categories = ({ value, onClickCategory }) => {
-  const [activeCategory, setActiveCategory] = useState(0);
-  const categories = [
-    'Все',
-    'Мясные',
-    'Вегетарианская',
-    'Гриль',
-    'Острые',
-    'Закрытые',
-  ];
+type CategoriesProps = {
+  value: number;
+  onClickCategory: (i: number) => void;
+};
 
-  // const onClickCategory = (index) => {
-  //   setActiveCategory(index);
-  // };
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
+  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
     <div className='categories'>

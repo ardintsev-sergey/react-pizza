@@ -18,13 +18,13 @@ const Home = () => {
   const { items, status } = useSelector(selectPizzaData);
   const sortType = sort.sortProperty;
 
-  const onClickCategory = (id) => {
+  const onClickCategory = (id: number) => {
     console.log(id);
     dispatch(setCategoryId(id));
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
   // useEffect(() => {
   const getPizzas = async () => {
@@ -34,6 +34,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         order,
         sortBy,

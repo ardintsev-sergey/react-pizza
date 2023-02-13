@@ -4,8 +4,12 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const FullPizza = () => {
-  const [pizza, setPizza] = useState();
+const FullPizza: React.FC = () => {
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,13 +20,16 @@ const FullPizza = () => {
           'https://637670f781a568fc25fee346.mockapi.io/pizzas/' + id
         );
         setPizza(data);
-      } catch (error) {}
+      } catch (error) {
+        alert('Ошибка при получении пиццы');
+        navigate('/');
+      }
     }
     fetchPizzaItem();
   }, []);
 
   if (!pizza) {
-    return 'Загрузка ...';
+    return <>'Загрузка ...'</>;
   }
 
   return (
